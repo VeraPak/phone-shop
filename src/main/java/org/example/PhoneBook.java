@@ -1,14 +1,13 @@
 package org.example;
 
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class PhoneBook {
     private static PhoneBook INSTANCE = null;
-    ConcurrentMap<String, String> phoneBook = new ConcurrentHashMap<>();
+    private static ConcurrentMap<String, String> phoneBook = new ConcurrentHashMap<>();
 
     private PhoneBook(){}
     public static PhoneBook getInstance() {
@@ -22,7 +21,7 @@ public class PhoneBook {
         return INSTANCE;
     }
 
-    int add(String name, String phone){
+    public int add(String name, String phone){
         try {
             phoneBook.putIfAbsent(name, phone);
         } catch (NullPointerException e) {
@@ -31,7 +30,7 @@ public class PhoneBook {
         return phoneBook.size();
     }
 
-    String findByNumber(String number) {
+    public String findByNumber(String number) {
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
             try {
                 if (number.equals(entry.getValue())) {
@@ -44,7 +43,7 @@ public class PhoneBook {
         return "Номер не найден";
     }
 
-    String findByName(String name) {
+    public String findByName(String name) {
         try {
             return phoneBook.getOrDefault(name, "Номер не найден");
         } catch (NullPointerException e) {
@@ -53,7 +52,7 @@ public class PhoneBook {
         }
     }
 
-    void printAllNames() {
+    public void printAllNames() {
         System.out.println(new TreeSet<>(phoneBook.keySet()));
     }
 }

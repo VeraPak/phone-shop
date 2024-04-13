@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PhoneBookTest {
-    PhoneBook phoneBook = PhoneBook.getInstance();
+    private PhoneBook phoneBook = PhoneBook.getInstance();
 
     @Order(1)
     @ParameterizedTest
