@@ -38,14 +38,28 @@ class PhoneBookTest {
     @Order(2)
     @ParameterizedTest
     @CsvSource(value = {
-            "+79682347543,Varya",
-            "8(972)883-74-56,Katrin",
-            "984-678-93-34,Lola",
-            ",Номер не найден",
-            "000-000-00-00,Номер не найден",
+            "+79682347543, Varya",
+            "8(972)883-74-56, Katrin",
+            "984-678-93-34, Lola",
+            ", Номер не найден",
+            "000-000-00-00, Номер не найден",
     })
     void testFindByNumber(String phone, String expectedValue) {
         String result = phoneBook.findByNumber(phone);
+        assertEquals(result, expectedValue);
+    }
+
+    @Order(3)
+    @ParameterizedTest
+    @CsvSource(value = {
+            "Varya, +79682347543",
+            "Katrin, 8(972)883-74-56",
+            "Lola, 984-678-93-34",
+            ", Номер не найден",
+            "000-000-00-00, Номер не найден",
+    })
+    void testFindByName(String name, String expectedValue) {
+        String result = phoneBook.findByName(name);
         assertEquals(result, expectedValue);
     }
 }

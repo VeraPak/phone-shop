@@ -41,4 +41,9 @@ public class PhoneBook {
         }
         return "Номер не найден";
     }
+
+    String findByName(String name){
+        return null;
+    }
+
 }
