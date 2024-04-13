@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PhoneBookTest {
-    PhoneBook phoneBook = new PhoneBook();
+    PhoneBook phoneBook = PhoneBook.getInstance();
     /*
     Метод должен возвращать количество контактов
     после добавления, при этом гарантируется,
