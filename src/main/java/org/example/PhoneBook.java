@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -29,6 +30,15 @@ public class PhoneBook {
     }
 
     String findByNumber(String number) {
-        return null;
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            try {
+                if (number.equals(entry.getValue())) {
+                    return entry.getKey();
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+        return "Номер не найден";
     }
 }
