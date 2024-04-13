@@ -54,5 +54,6 @@ public class PhoneBook {
     }
 
     void printAllNames() {
+        System.out.println(new TreeSet<>(phoneBook.keySet()));
     }
 }
