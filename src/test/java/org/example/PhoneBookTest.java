@@ -4,18 +4,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PhoneBookTest {
     PhoneBook phoneBook = PhoneBook.getInstance();
-    /*
-    Метод должен возвращать количество контактов
-    после добавления, при этом гарантируется,
-    что не будут добавляться повторяющиеся имена
-     */
+
     @Order(1)
     @ParameterizedTest
     @CsvSource(value = {
@@ -32,9 +33,6 @@ class PhoneBookTest {
         assertEquals(result, expectedValue);
     }
 
-    /*
-    найти имя по номеру без полного перебора
-     */
     @Order(2)
     @ParameterizedTest
     @CsvSource(value = {
@@ -61,5 +59,20 @@ class PhoneBookTest {
     void testFindByName(String name, String expectedValue) {
         String result = phoneBook.findByName(name);
         assertEquals(result, expectedValue);
+    }
+
+    @Order(4)
+    @Test
+    void testPrintAllNames() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        phoneBook.printAllNames();
+        String printed = out.toString().trim();
+
+        String[] expected = new String[]{"Katrin", "Lola", "Varya"};
+        String ex = Arrays.toString(expected);
+
+        assertEquals(printed, ex);
     }
 }
