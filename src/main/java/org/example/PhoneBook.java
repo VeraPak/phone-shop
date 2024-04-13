@@ -42,8 +42,13 @@ public class PhoneBook {
         return "Номер не найден";
     }
 
-    String findByName(String name){
-        return null;
+    String findByName(String name) {
+        try {
+            return phoneBook.getOrDefault(name, "Номер не найден");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return "Номер не найден";
+        }
     }
 
 }
